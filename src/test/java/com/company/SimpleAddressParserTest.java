@@ -3,11 +3,19 @@ package com.company;
 import com.company.token.NumberToken;
 import com.company.token.StringToken;
 import com.company.token.Token;
+import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
 
 public class SimpleAddressParserTest {
+
+    private SimpleAddressParser underTest;
+
+    @Before
+    public void setUp() throws Exception {
+        underTest = new SimpleAddressParser();
+    }
 
     @Test
     public void oneWordOneNumber() throws Exception {
@@ -17,7 +25,7 @@ public class SimpleAddressParserTest {
                 new NumberToken("3")
         };
         // When
-        Address result = new SimpleAddressParser().parse(input);
+        Address result = underTest.parse(input);
         // Then
         assertNotNull(result);
     }
@@ -31,8 +39,22 @@ public class SimpleAddressParserTest {
                 new NumberToken("3")
         };
         // When
-        Address result = new SimpleAddressParser().parse(input);
+        Address result = underTest.parse(input);
         // Then
         assertNotNull(result);
+    }
+
+    @Test
+    public void emptyParameter() throws Exception {
+        // Given / When / Then
+        assertNull(underTest.parse(new Token[0]));
+    }
+
+    @Test
+    public void nullParameter() throws Exception {
+        // Given / When / Then
+        assertNull(underTest.parse(new Token[]{null}));
+        assertNull(underTest.parse(new Token[]{null,null}));
+        assertNull(underTest.parse(new Token[]{null,null,null}));
     }
 }

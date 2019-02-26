@@ -10,6 +10,9 @@ import java.util.Arrays;
 public class SimpleAddressParser implements AddressParseStrategy {
 
     public Address parse(Token[] addressToken) {
+        if (addressToken.length < 2) {
+            return null;
+        }
         if (allFromStringType(Arrays.copyOfRange(addressToken, 0, addressToken.length-2))
                 && isNumberOrMixed(addressToken[addressToken.length-1])) {
             return new Address(addressToken[0].getValue(), addressToken[1].getValue());
