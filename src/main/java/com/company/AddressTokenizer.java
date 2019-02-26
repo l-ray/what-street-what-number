@@ -1,9 +1,10 @@
 package com.company;
 
-import com.company.token.Token;
-import com.company.token.TokenFactory;
+import com.company.token.*;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -17,8 +18,10 @@ public class AddressTokenizer {
     private static final Function<String, String> _CLEAN_FROM_WHITESPACES = item -> item.replaceFirst(_WHITESPACES_AS_REGEX, "");
     private static final Function<String, Token> _STRING_TO_TOKEN = item -> TokenFactory.asToken(item);
 
-    AddressTokenizer(){
-        // nothing to be added yet.
+    private final List<AddressTokenOptimizeStrategy> _optimizer;
+
+    AddressTokenizer(List<AddressTokenOptimizeStrategy> optimizer) {
+        this._optimizer = optimizer;
     }
 
     Token[] tokenize(String addressString) {
@@ -29,8 +32,13 @@ public class AddressTokenizer {
                 .map(_CLEAN_FROM_WHITESPACES)
                 .map(_STRING_TO_TOKEN)
                 .toArray(size -> new Token[size]);
-        return token;
+        return optimizeToken(token);
     }
 
-
+    private Token[] optimizeToken(Token[] srcToken) {
+        for (AddressTokenOptimizeStrategy a_optimizer : _optimizer) {
+            srcToken = a_optimizer.optimize(srcToken);
+        }
+        return srcToken;
+    }
 }

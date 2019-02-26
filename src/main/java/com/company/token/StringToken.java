@@ -15,4 +15,9 @@ public class StringToken implements Token {
     public String getValue() {
         return value;
     }
+
+    @Override
+    public String toString() {
+        return "StringToken |"+value+"|";
+    }
 }

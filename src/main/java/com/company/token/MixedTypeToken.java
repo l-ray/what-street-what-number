@@ -15,4 +15,10 @@ public class MixedTypeToken implements Token {
     public String getValue() {
         return value;
     }
+
+    @Override
+    public String toString() {
+        return "MixedTypeToken |"+value+"|";
+    }
+
 }

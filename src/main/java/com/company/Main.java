@@ -6,12 +6,16 @@ import java.util.Arrays;
 
 public class Main {
 
-    private AddressTokenizer tokenizer;
-    private AddressParser parser;
+    private final AddressTokenizer _tokenizer;
+    private final AddressParser _parser;
 
     private Main() {
-        tokenizer = new AddressTokenizer();
-        parser = new AddressParser(
+        _tokenizer = new AddressTokenizer(
+                Arrays.asList(new AddressTokenOptimizeStrategy[]{
+                        new HouseNumberStickyOptimizerStrategy()
+                })
+        );
+        _parser = new AddressParser(
                 Arrays.asList(new AddressParseStrategy[]{
                         new SimpleAddressParser()
                 })
@@ -25,9 +29,9 @@ public class Main {
     }
 
     public Address convertStringToJSON(String addressAsString) {
-        Token[] addressToken = tokenizer.tokenize(addressAsString);
-        //Address  result = parser.parse(addressToken);
-        return null;
+        Token[] addressToken = _tokenizer.tokenize(addressAsString);
+        Address  result = _parser.parse(addressToken);
+        return result;
     }
 
 }

@@ -1,5 +1,6 @@
 package com.company;
 
+import com.company.token.MixedTypeToken;
 import com.company.token.NumberToken;
 import com.company.token.StringToken;
 import com.company.token.Token;
@@ -23,6 +24,19 @@ public class SimpleAddressParserTest {
         Token[] input = new Token[]{
                 new StringToken("Winterallee"),
                 new NumberToken("3")
+        };
+        // When
+        Address result = underTest.parse(input);
+        // Then
+        assertNotNull(result);
+    }
+
+    @Test
+    public void oneWordOneMixedType() throws Exception {
+        // Given
+        Token[] input = new Token[]{
+                new StringToken("Blaufeldweg"),
+                new MixedTypeToken("123B")
         };
         // When
         Address result = underTest.parse(input);
