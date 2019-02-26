@@ -6,6 +6,7 @@ import com.company.token.StringToken;
 import com.company.token.Token;
 
 import java.util.Arrays;
+import java.util.stream.Collectors;
 
 public class SimpleAddressParser implements AddressParseStrategy {
 
@@ -13,9 +14,14 @@ public class SimpleAddressParser implements AddressParseStrategy {
         if (addressToken.length < 2) {
             return null;
         }
-        if (allFromStringType(Arrays.copyOfRange(addressToken, 0, addressToken.length-2))
-                && isNumberOrMixed(addressToken[addressToken.length-1])) {
-            return new Address(addressToken[0].getValue(), addressToken[1].getValue());
+        Token[] streetCandidates = Arrays.copyOfRange(addressToken, 0, addressToken.length-1);
+        Token houseNumberCandidate = addressToken[addressToken.length-1];
+        if (allFromStringType(streetCandidates)
+                && isNumberOrMixed(houseNumberCandidate)) {
+            return new Address(
+                    Arrays.stream(streetCandidates).map(Token::getValue).collect( Collectors.joining(" ") ),
+                    houseNumberCandidate.getValue()
+            );
         }
         return null;
     }

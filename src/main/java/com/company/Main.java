@@ -9,7 +9,7 @@ public class Main {
     private final AddressTokenizer _tokenizer;
     private final AddressParser _parser;
 
-    private Main() {
+    Main() {
         _tokenizer = new AddressTokenizer(
                 Arrays.asList(new AddressTokenOptimizeStrategy[]{
                         new HouseNumberStickyOptimizerStrategy()
@@ -28,7 +28,7 @@ public class Main {
         System.out.println(result.toString());
     }
 
-    public Address convertStringToJSON(String addressAsString) {
+    Address convertStringToJSON(String addressAsString) {
         Token[] addressToken = _tokenizer.tokenize(addressAsString);
         Address  result = _parser.parse(addressToken);
         return result;
