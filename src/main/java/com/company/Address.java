@@ -20,6 +20,6 @@ public class Address {
 
     @Override
     public String toString() {
-        return "{\"street\": \"" + getStreet() + "\", \"housenumber\": " + getHouseNumber() + "}";
+        return "\"street\": \"" + getStreet() + "\", \"housenumber\": " + getHouseNumber();
     }
 }

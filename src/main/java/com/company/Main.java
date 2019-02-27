@@ -2,6 +2,8 @@ package com.company;
 
 import com.company.token.Token;
 
+import javax.json.Json;
+import javax.json.JsonObject;
 import java.util.Arrays;
 
 public class Main {
@@ -16,22 +18,24 @@ public class Main {
                 })
         );
         _parser = new AddressParser(
-                Arrays.asList(new AddressParseStrategy[]{
-                        new SimpleAddressParser()
-                })
+                Arrays.asList(
+                        new SimpleAddressParser(),
+                        new NumberFirstAddressParser(),
+                        new MultipleNumbersAddressParser()
+                )
         );
     }
 
     public static void main(String[] args) {
         String addressAsString = args[0];
-        Address result = new Main().convertStringToJSON(addressAsString);
+        JsonObject result = new Main().convertStringToJSON(addressAsString);
         System.out.println(result.toString());
     }
 
-    Address convertStringToJSON(String addressAsString) {
+    JsonObject convertStringToJSON(String addressAsString) {
         Token[] addressToken = _tokenizer.tokenize(addressAsString);
         Address  result = _parser.parse(addressToken);
-        return result;
+        return AddressSerializer.serialize(result);
     }
 
 }

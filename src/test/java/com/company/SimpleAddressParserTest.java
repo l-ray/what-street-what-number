@@ -11,7 +11,7 @@ import static org.junit.Assert.*;
 
 public class SimpleAddressParserTest {
 
-    private SimpleAddressParser underTest;
+    private AddressParseStrategy underTest;
 
     @Before
     public void setUp() throws Exception {
