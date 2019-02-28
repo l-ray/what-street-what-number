@@ -17,6 +17,6 @@ public abstract class TokenFactory {
         if (input.matches("[0-9a-zA-Z]*")) {
             return new MixedTypeToken((input));
         }
-        return null;
+        throw new IllegalArgumentException("Could not tokenize input"+input);
     }
 }

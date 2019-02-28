@@ -5,4 +5,6 @@ package com.company.token;
  */
 public interface Token {
     String getValue();
+    boolean isWord();
+    boolean isNumber();
 }

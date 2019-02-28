@@ -3,21 +3,17 @@ package com.company.token;
 /**
  * Created by lray on 25.02.19.
  */
-public class StringToken implements Token {
-
-    private final String value;
+public class StringToken extends AbstractToken {
 
     public StringToken(String value) {
-        this.value = value;
+        super(value);
     }
 
     @Override
-    public String getValue() {
-        return value;
-    }
+    public boolean isWord() { return true; }
 
     @Override
     public String toString() {
-        return "StringToken |"+value+"|";
+        return "StringToken |" + getValue() + "|";
     }
 }

@@ -84,4 +84,9 @@ public class AddressTokenizerTest {
     public void tokenizeNullString() {
         underTest.tokenize(null);
     }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void tokenizeSpecialCharString() {
+        underTest.tokenize("23ü");
+    }
 }

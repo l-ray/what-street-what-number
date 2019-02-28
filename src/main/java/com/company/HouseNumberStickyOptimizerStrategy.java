@@ -32,10 +32,10 @@ public class HouseNumberStickyOptimizerStrategy implements AddressTokenOptimizeS
     private List<Token> possiblyHandleSuffixLetter(Token[] srcToken, int i, List<Token> targetToken) {
         Token aToken = srcToken[i];
         // TODO terrible hack to make the unit test pass - don't forget to refactor
-        if (aToken instanceof StringToken
+        if (aToken.isWord()
                 && aToken.getValue().length() <= _MAX_HOUSE_NBR_SUFFIX_LENGTH
                 && i > 0
-                && srcToken[i - 1] instanceof NumberToken
+                && srcToken[i - 1].isNumber()
                 ) {
             targetToken.set(
                     targetToken.size() - 1,
@@ -50,9 +50,9 @@ public class HouseNumberStickyOptimizerStrategy implements AddressTokenOptimizeS
     private List<Token> possiblyHandlePrefixLetter(Token[] srcToken, int i, List<Token> targetToken) {
         Token aToken = srcToken[i];
         // TODO terrible hack to make the unit test pass - don't forget to refactor
-        if ((aToken instanceof MixedTypeToken || aToken instanceof NumberToken)
+        if ((aToken.isNumber())
                 && i > 0
-                && srcToken[i - 1] instanceof StringToken
+                && srcToken[i - 1].isWord()
                 && _NUMBER_PREFIXES.contains(srcToken[i - 1].getValue().toLowerCase())
                 ) {
             targetToken.set(
