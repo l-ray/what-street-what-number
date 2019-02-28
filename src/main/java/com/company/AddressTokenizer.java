@@ -25,6 +25,9 @@ public class AddressTokenizer {
     }
 
     Token[] tokenize(String addressString) {
+        if (addressString == null) {
+            throw new IllegalArgumentException("input string can not be null.");
+        }
         String[] splitString = addressString.split(" ");
         Token[] token = Arrays
                 .stream(splitString)

@@ -13,6 +13,7 @@ import java.util.*;
 public class HouseNumberStickyOptimizerStrategy implements AddressTokenOptimizeStrategy {
 
     private static final Set<String> _NUMBER_PREFIXES = new HashSet<>(Arrays.asList(new String[]{"no"}));
+    public static final int _MAX_HOUSE_NBR_SUFFIX_LENGTH = 1;
 
     @Override
     public Token[] optimize(Token[] srcToken) {
@@ -32,7 +33,7 @@ public class HouseNumberStickyOptimizerStrategy implements AddressTokenOptimizeS
         Token aToken = srcToken[i];
         // TODO terrible hack to make the unit test pass - don't forget to refactor
         if (aToken instanceof StringToken
-                && aToken.getValue().length() <= 1
+                && aToken.getValue().length() <= _MAX_HOUSE_NBR_SUFFIX_LENGTH
                 && i > 0
                 && srcToken[i - 1] instanceof NumberToken
                 ) {

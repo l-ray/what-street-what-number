@@ -35,6 +35,9 @@ public class Main {
     JsonObject convertStringToJSON(String addressAsString) {
         Token[] addressToken = _tokenizer.tokenize(addressAsString);
         Address  result = _parser.parse(addressToken);
+        if (result == null) {
+            throw new IllegalArgumentException("Argument is not a mappable address :" + addressAsString );
+        }
         return AddressSerializer.serialize(result);
     }
 

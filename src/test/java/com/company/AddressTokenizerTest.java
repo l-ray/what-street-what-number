@@ -51,6 +51,24 @@ public class AddressTokenizerTest {
     }
 
     @Test
+    public void eliminateSpacesFromString() {
+        // Given
+        String input = "   Im    Winkel    48b  ";
+        // When
+        Token[] result = underTest.tokenize(input);
+        // Then
+        assertEquals("token-Length of "+input, 3, result.length);
+        for (Token item : result) {
+            assertTrue(item.getValue().length() > 0);
+            assertEquals(
+                    "Token correctly trimmed",
+                    item.getValue(),
+                    item.getValue().trim()
+            );
+        }
+    }
+
+    @Test
     public void cleansNumberTokenFromClutter() throws Exception {
         // Given
         String input = "4, rue;";
@@ -60,5 +78,10 @@ public class AddressTokenizerTest {
         assertEquals("token-Length of "+input, 2, result.length);
         assertTrue(result[0] instanceof NumberToken);
         assertTrue(result[1] instanceof StringToken);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void tokenizeNullString() {
+        underTest.tokenize(null);
     }
 }
