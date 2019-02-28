@@ -1,4 +1,4 @@
-package com.company.token;
+package com.company.tokenizer.token;
 
 /**
  * Created by lray on 25.02.19.
@@ -18,5 +18,9 @@ public abstract class TokenFactory {
             return new MixedTypeToken((input));
         }
         throw new IllegalArgumentException("Could not tokenize input"+input);
+    }
+
+    public static Token asMultiTypeToken(String input) {
+        return new MixedTypeToken(input);
     }
 }

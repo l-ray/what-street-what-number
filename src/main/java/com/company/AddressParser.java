@@ -1,6 +1,8 @@
 package com.company;
 
-import com.company.token.Token;
+import com.company.dto.Address;
+import com.company.rule.AddressParseStrategy;
+import com.company.tokenizer.token.Token;
 
 import java.util.Iterator;
 import java.util.List;

@@ -1,6 +1,6 @@
 package com.company;
 
-import com.company.token.*;
+import com.company.tokenizer.token.*;
 import org.junit.Before;
 import org.junit.Test;
 

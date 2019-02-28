@@ -1,22 +1,20 @@
-package com.company;
+package com.company.rule;
 
-import com.company.token.MixedTypeToken;
-import com.company.token.NumberToken;
-import com.company.token.StringToken;
-import com.company.token.Token;
+import com.company.dto.Address;
+import com.company.tokenizer.token.Token;
 
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
-public class SimpleAddressParser implements AddressParseStrategy {
+public class NumberFirstAddressParser implements AddressParseStrategy {
 
     public Address parse(Token[] addressToken) {
         addressToken = sanitize(addressToken);
         if (addressToken.length < 2) {
             return null;
         }
-        Token[] streetCandidates = Arrays.copyOfRange(addressToken, 0, addressToken.length-1);
-        Token houseNumberCandidate = addressToken[addressToken.length-1];
+        Token[] streetCandidates = Arrays.copyOfRange(addressToken, 1, addressToken.length);
+        Token houseNumberCandidate = addressToken[0];
         if (allFromStringType(streetCandidates)
                 && isNumberOrMixed(houseNumberCandidate)) {
             return new Address(
@@ -30,6 +28,7 @@ public class SimpleAddressParser implements AddressParseStrategy {
     private Token[] sanitize(Token[] addressToken) {
         return Arrays.stream(addressToken).filter(item -> item != null).toArray(Token[]::new);
     }
+
 
     private boolean allFromStringType(Token[] tokens) {
         for (Token item : tokens) {

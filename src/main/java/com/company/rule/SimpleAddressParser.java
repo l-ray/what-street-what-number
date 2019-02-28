@@ -1,15 +1,12 @@
-package com.company;
+package com.company.rule;
 
-import com.company.token.MixedTypeToken;
-import com.company.token.NumberToken;
-import com.company.token.StringToken;
-import com.company.token.Token;
+import com.company.dto.Address;
+import com.company.tokenizer.token.Token;
 
 import java.util.Arrays;
-import java.util.Stack;
 import java.util.stream.Collectors;
 
-public class MultipleNumbersAddressParser implements AddressParseStrategy {
+public class SimpleAddressParser implements AddressParseStrategy {
 
     public Address parse(Token[] addressToken) {
         addressToken = sanitize(addressToken);
@@ -18,7 +15,7 @@ public class MultipleNumbersAddressParser implements AddressParseStrategy {
         }
         Token[] streetCandidates = Arrays.copyOfRange(addressToken, 0, addressToken.length-1);
         Token houseNumberCandidate = addressToken[addressToken.length-1];
-        if (hasStringToken(streetCandidates)
+        if (allFromStringType(streetCandidates)
                 && isNumberOrMixed(houseNumberCandidate)) {
             return new Address(
                     Arrays.stream(streetCandidates).map(Token::getValue).collect( Collectors.joining(" ") ),
@@ -32,16 +29,16 @@ public class MultipleNumbersAddressParser implements AddressParseStrategy {
         return Arrays.stream(addressToken).filter(item -> item != null).toArray(Token[]::new);
     }
 
-    private boolean hasStringToken(Token[] tokens) {
+    private boolean allFromStringType(Token[] tokens) {
         for (Token item : tokens) {
-            if ((item.isWord())) {
-                return true;
+            if (!(item.isWord())) {
+                return false;
             }
         }
-        return false;
+        return true;
     }
 
     private boolean isNumberOrMixed(Token token) {
-        return token.isNumber();
+        return (token.isNumber());
     }
 }

@@ -1,8 +1,9 @@
-package com.company;
+package com.company.rule;
 
-import com.company.token.Token;
+import com.company.dto.Address;
+import com.company.tokenizer.token.Token;
 
-interface AddressParseStrategy {
+public interface AddressParseStrategy {
 
     /**
      * Return an address string parsed into street and housenumber.

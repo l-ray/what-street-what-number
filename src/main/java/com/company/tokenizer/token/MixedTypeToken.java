@@ -1,11 +1,11 @@
-package com.company.token;
+package com.company.tokenizer.token;
 
 /**
- * Created by lray on 25.02.19.
+ * Token representing everything that is not a clear string or a clear number.
  */
-public class MixedTypeToken extends AbstractToken {
+public final class MixedTypeToken extends AbstractToken {
 
-    public MixedTypeToken(String value) {
+    MixedTypeToken(String value) {
         super(value);
     }
 

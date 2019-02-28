@@ -1,30 +1,25 @@
-package com.company;
+package com.company.tokenizer;
 
-import com.company.token.MixedTypeToken;
-import com.company.token.NumberToken;
-import com.company.token.StringToken;
-import com.company.token.Token;
+import com.company.tokenizer.token.*;
+import com.company.tokenizer.rule.HouseNumberStickyRule;
 import org.junit.Test;
 
 import java.util.Arrays;
 
 import static org.junit.Assert.*;
 
-/**
- * Created by lray on 26.02.19.
- */
-public class HouseNumberStickyOptimizerStrategyTest {
+public class HouseNumberStickyRuleTest {
 
     @Test
     public void combineAlphanumericHouseNumbersWithSpace() throws Exception {
         // Given
-        Token[] input = new Token[]{
-                new StringToken("Vogelwiese"),
-                new NumberToken("23"),
-                new StringToken("b")
-        };
+        Token[] input = new TokenBuilder()
+                .addWord("Vogelwiese")
+                .addNumber("23")
+                .addWord("b")
+                .build();
         // When
-        Token[] result = new HouseNumberStickyOptimizerStrategy().optimize(input);
+        Token[] result = new HouseNumberStickyRule().optimize(input);
         // Then
         assertEquals("token-Length of "+Arrays.asList(input), 2, result.length);
         assertTrue(result[0] instanceof StringToken);
@@ -35,13 +30,13 @@ public class HouseNumberStickyOptimizerStrategyTest {
     @Test
     public void combineStopWordAndHouseNumbers() throws Exception {
         // Given
-        Token[] input = new Token[]{
-                new StringToken("Calle"),
-                new StringToken("No"),
-                new NumberToken("1540")
-        };
+        Token[] input = new TokenBuilder()
+                .addWord("Calle")
+                .addWord("No")
+                .addNumber("1540")
+                .build();
         // When
-        Token[] result = new HouseNumberStickyOptimizerStrategy().optimize(input);
+        Token[] result = new HouseNumberStickyRule().optimize(input);
         // Then
         assertEquals("token-Length of "+ Arrays.asList(input), 2, result.length);
         assertTrue(result[0] instanceof StringToken);

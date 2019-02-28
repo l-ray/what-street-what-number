@@ -1,4 +1,4 @@
-package com.company.token;
+package com.company.tokenizer.token;
 
 import org.junit.Test;
 

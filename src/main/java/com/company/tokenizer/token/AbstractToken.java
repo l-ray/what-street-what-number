@@ -1,12 +1,12 @@
-package com.company.token;
+package com.company.tokenizer.token;
 
 /**
- * Created by lray on 28.02.19.
+ * Holds common functionality for all immutable token.
  */
-public class AbstractToken implements Token {
+abstract class AbstractToken implements Token {
     private final String value;
 
-    public AbstractToken(String value) {
+    protected AbstractToken(String value) {
         this.value = value;
     }
 

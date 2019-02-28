@@ -1,11 +1,11 @@
-package com.company.token;
+package com.company.tokenizer.token;
 
 /**
- * Created by lray on 25.02.19.
+ * Token represents a pure word as a string.
  */
-public class StringToken extends AbstractToken {
+public final class StringToken extends AbstractToken {
 
-    public StringToken(String value) {
+    StringToken(String value) {
         super(value);
     }
 

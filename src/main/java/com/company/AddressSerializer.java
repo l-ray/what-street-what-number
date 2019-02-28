@@ -1,5 +1,7 @@
 package com.company;
 
+import com.company.dto.Address;
+
 import javax.json.Json;
 import javax.json.JsonObject;
 

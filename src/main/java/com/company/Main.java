@@ -1,8 +1,13 @@
 package com.company;
 
-import com.company.token.Token;
+import com.company.dto.Address;
+import com.company.rule.MultipleNumbersAddressParser;
+import com.company.rule.NumberFirstAddressParser;
+import com.company.rule.SimpleAddressParser;
+import com.company.tokenizer.token.Token;
+import com.company.tokenizer.rule.OptimizationRule;
+import com.company.tokenizer.rule.HouseNumberStickyRule;
 
-import javax.json.Json;
 import javax.json.JsonObject;
 import java.util.Arrays;
 
@@ -13,8 +18,8 @@ public class Main {
 
     Main() {
         _tokenizer = new AddressTokenizer(
-                Arrays.asList(new AddressTokenOptimizeStrategy[]{
-                        new HouseNumberStickyOptimizerStrategy()
+                Arrays.asList(new OptimizationRule[]{
+                        new HouseNumberStickyRule()
                 })
         );
         _parser = new AddressParser(
@@ -34,7 +39,7 @@ public class Main {
 
     JsonObject convertStringToJSON(String addressAsString) {
         Token[] addressToken = _tokenizer.tokenize(addressAsString);
-        Address  result = _parser.parse(addressToken);
+        Address result = _parser.parse(addressToken);
         if (result == null) {
             throw new IllegalArgumentException("Argument is not a mappable address :" + addressAsString );
         }

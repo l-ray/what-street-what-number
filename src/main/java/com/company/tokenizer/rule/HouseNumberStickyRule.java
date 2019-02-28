@@ -1,16 +1,17 @@
-package com.company;
+package com.company.tokenizer.rule;
 
-import com.company.token.MixedTypeToken;
-import com.company.token.NumberToken;
-import com.company.token.StringToken;
-import com.company.token.Token;
+import com.company.tokenizer.token.Token;
+import com.company.tokenizer.token.TokenFactory;
 
 import java.util.*;
 
 /**
- * Created by lray on 26.02.19.
+ * Makes a very short string stick to a number
+ *
+ * Identify if a number has a short string as next element, and if so assumes it is a house number appendix. An example
+ * would be "25" + "b" being connected to "25b".
  */
-public class HouseNumberStickyOptimizerStrategy implements AddressTokenOptimizeStrategy {
+public class HouseNumberStickyRule implements OptimizationRule {
 
     private static final Set<String> _NUMBER_PREFIXES = new HashSet<>(Arrays.asList(new String[]{"no"}));
     public static final int _MAX_HOUSE_NBR_SUFFIX_LENGTH = 1;
@@ -39,7 +40,7 @@ public class HouseNumberStickyOptimizerStrategy implements AddressTokenOptimizeS
                 ) {
             targetToken.set(
                     targetToken.size() - 1,
-                    new MixedTypeToken(targetToken.get(targetToken.size() - 1).getValue() + " " + aToken.getValue()
+                    TokenFactory.asMultiTypeToken(targetToken.get(targetToken.size() - 1).getValue() + " " + aToken.getValue()
                     )
             );
             return targetToken;
@@ -57,8 +58,8 @@ public class HouseNumberStickyOptimizerStrategy implements AddressTokenOptimizeS
                 ) {
             targetToken.set(
                     targetToken.size() - 1,
-                    new MixedTypeToken(targetToken.get(targetToken.size() - 1).getValue() + " " + aToken.getValue()
-                    )
+                    TokenFactory.asMultiTypeToken(targetToken.get(targetToken.size() - 1).getValue() + " " + aToken.getValue()
+                )
             );
             return targetToken;
         }
