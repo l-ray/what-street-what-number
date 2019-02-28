@@ -80,6 +80,21 @@ public class MainTest {
         convert(null);
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void runsStaticVoidMainWithoutParameter() {
+        Main.main(new String[]{});
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void runsStaticVoidMainWithBogusAddressParameter() {
+        Main.main(new String[]{"fkjdsl@fdjslk1 13@"});
+    }
+
+    @Test
+    public void runsStaticVoidMainHappyPath() {
+        Main.main(new String[]{"Bach 123"});
+    }
+
     private void assertAddressMapping(String input, String expected) {
         String actual = convert(input);
         assertEquals(actual, expected);

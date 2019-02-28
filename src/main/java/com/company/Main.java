@@ -34,6 +34,9 @@ public class Main {
     }
 
     public static void main(String[] args) {
+        if (args.length != 1) {
+            throw new IllegalArgumentException("Only one parameter needed.");
+        }
         String addressAsString = args[0];
         JsonObject result = new Main().convertStringToJSON(addressAsString);
         System.out.println(result.toString());
