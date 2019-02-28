@@ -4,17 +4,20 @@ import com.company.dto.Address;
 
 import javax.json.Json;
 import javax.json.JsonObject;
+import javax.json.JsonObjectBuilder;
 
-/**
- * Created by lray on 27.02.19.
- */
-public class AddressSerializer {
+public abstract class AddressSerializer {
     public static JsonObject serialize(Address anAddress) {
-        // Create Json and print
-        JsonObject json = Json.createObjectBuilder()
-            .add("street", anAddress.getStreet())
-            .add("housenumber", anAddress.getHouseNumber())
-            .build();
-        return json;
+        if (anAddress == null) {
+            throw new IllegalArgumentException("Null value not allowed.");
+        }
+        JsonObjectBuilder json = Json.createObjectBuilder();
+        if (anAddress.getStreet() != null) {
+            json.add("street", anAddress.getStreet());
+        }
+        if (anAddress.getHouseNumber() != null) {
+            json.add("housenumber", anAddress.getHouseNumber());
+        }
+        return json.build();
     }
 }

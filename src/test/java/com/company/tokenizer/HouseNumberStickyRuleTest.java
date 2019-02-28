@@ -1,12 +1,16 @@
 package com.company.tokenizer;
 
-import com.company.tokenizer.token.*;
 import com.company.tokenizer.rule.HouseNumberStickyRule;
+import com.company.tokenizer.token.MixedTypeToken;
+import com.company.tokenizer.token.StringToken;
+import com.company.tokenizer.token.Token;
+import com.company.tokenizer.token.TokenBuilder;
 import org.junit.Test;
 
 import java.util.Arrays;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class HouseNumberStickyRuleTest {
 

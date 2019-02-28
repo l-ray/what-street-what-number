@@ -2,7 +2,7 @@ package com.company.dto;
 
 import org.junit.Test;
 
-import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.CoreMatchers.containsString;
 import static org.junit.Assert.*;
 
 public class AddressTest {
@@ -28,5 +28,15 @@ public class AddressTest {
         // Then
         assertThat("Holds Street",result, containsString(STREET));
         assertThat("Holds house number",result, containsString(HOUSE_NUMBER));
+    }
+
+    @Test
+    public void isNullSafe() throws Exception {
+        // Given / When
+        Address result = new Address(null, null);
+        // Then
+        assertNull("Street", result.getStreet());
+        assertNull("House number",result.getHouseNumber());
+        assertNotNull("Holds ToString", result.toString());
     }
 }

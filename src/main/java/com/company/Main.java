@@ -4,9 +4,9 @@ import com.company.dto.Address;
 import com.company.rule.MultipleNumbersAddressParser;
 import com.company.rule.NumberFirstAddressParser;
 import com.company.rule.SimpleAddressParser;
-import com.company.tokenizer.token.Token;
-import com.company.tokenizer.rule.OptimizationRule;
 import com.company.tokenizer.rule.HouseNumberStickyRule;
+import com.company.tokenizer.rule.OptimizationRule;
+import com.company.tokenizer.token.Token;
 
 import javax.json.JsonObject;
 import java.util.Arrays;

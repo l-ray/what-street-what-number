@@ -1,12 +1,16 @@
 package com.company;
 
-import com.company.tokenizer.token.*;
+import com.company.tokenizer.token.MixedTypeToken;
+import com.company.tokenizer.token.NumberToken;
+import com.company.tokenizer.token.StringToken;
+import com.company.tokenizer.token.Token;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.util.Collections;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class AddressTokenizerTest {
 

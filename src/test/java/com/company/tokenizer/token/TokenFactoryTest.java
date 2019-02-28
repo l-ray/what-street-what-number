@@ -2,11 +2,8 @@ package com.company.tokenizer.token;
 
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
-/**
- * Created by lray on 25.02.19.
- */
 public class TokenFactoryTest {
 
     @Test

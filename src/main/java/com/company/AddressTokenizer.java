@@ -1,7 +1,8 @@
 package com.company;
 
 import com.company.tokenizer.rule.OptimizationRule;
-import com.company.tokenizer.token.*;
+import com.company.tokenizer.token.Token;
+import com.company.tokenizer.token.TokenFactory;
 
 import java.util.Arrays;
 import java.util.List;

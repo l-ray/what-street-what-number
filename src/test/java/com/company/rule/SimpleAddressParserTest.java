@@ -1,13 +1,12 @@
 package com.company.rule;
 
 import com.company.dto.Address;
-import com.company.rule.AddressParseStrategy;
-import com.company.rule.SimpleAddressParser;
-import com.company.tokenizer.token.*;
+import com.company.tokenizer.token.Token;
+import com.company.tokenizer.token.TokenBuilder;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotNull;
 
 public class SimpleAddressParserTest extends AbstractRuleTest {
 

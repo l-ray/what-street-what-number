@@ -2,11 +2,8 @@ package com.company;
 
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
-/**
- * Created by lray on 26.02.19.
- */
 public class MainTest {
 
     @Test
