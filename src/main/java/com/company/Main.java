@@ -4,6 +4,7 @@ import com.company.dto.Address;
 import com.company.rule.MultipleNumbersAddressParser;
 import com.company.rule.NumberFirstAddressParser;
 import com.company.rule.SimpleAddressParser;
+import com.company.tokenizer.rule.HouseNumberKeywordRule;
 import com.company.tokenizer.rule.HouseNumberStickyRule;
 import com.company.tokenizer.rule.OptimizationRule;
 import com.company.tokenizer.token.Token;
@@ -18,9 +19,10 @@ public class Main {
 
     Main() {
         _tokenizer = new AddressTokenizer(
-                Arrays.asList(new OptimizationRule[]{
-                        new HouseNumberStickyRule()
-                })
+                Arrays.asList(
+                        new HouseNumberStickyRule(),
+                        new HouseNumberKeywordRule(new String[]{"no"})
+                )
         );
         _parser = new AddressParser(
                 Arrays.asList(

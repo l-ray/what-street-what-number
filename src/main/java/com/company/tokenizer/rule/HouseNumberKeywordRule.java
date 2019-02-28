@@ -11,9 +11,13 @@ import java.util.*;
  * Identify if a number has a short string as next element, and if so assumes it is a house number appendix. An example
  * would be "25" + "b" being connected to "25b".
  */
-public class HouseNumberStickyRule implements OptimizationRule {
+public class HouseNumberKeywordRule implements OptimizationRule {
 
-    public static final int _MAX_HOUSE_NBR_SUFFIX_LENGTH = 1;
+    private final Set<String> numberPrefixes;
+
+    public HouseNumberKeywordRule(String[] keywords) {
+        numberPrefixes = new HashSet<>(Arrays.asList(keywords));
+    }
 
     @Override
     public Token[] optimize(Token[] srcToken) {
@@ -21,20 +25,20 @@ public class HouseNumberStickyRule implements OptimizationRule {
         for (int i = 0; i < srcToken.length; i++) {
             Token aToken = srcToken[i];
             // TODO terrible hack to make the unit test pass - don't forget to refactor
-            if ( possiblyHandleSuffixLetter(srcToken,i,targetToken) == null  ) {
+            if ( possiblyHandlePrefixLetter(srcToken, i, targetToken) == null  ) {
                 targetToken.add(aToken);
             }
         }
         return targetToken.toArray(new Token[targetToken.size()]);
     }
 
-    private List<Token> possiblyHandleSuffixLetter(Token[] srcToken, int i, List<Token> targetToken) {
+    private List<Token> possiblyHandlePrefixLetter(Token[] srcToken, int i, List<Token> targetToken) {
         Token aToken = srcToken[i];
         // TODO terrible hack to make the unit test pass - don't forget to refactor
-        if (aToken.isWord()
-                && aToken.getValue().length() <= _MAX_HOUSE_NBR_SUFFIX_LENGTH
+        if ((aToken.isNumber())
                 && i > 0
-                && srcToken[i - 1].isNumber()
+                && srcToken[i - 1].isWord()
+                && numberPrefixes.contains(srcToken[i - 1].getValue().toLowerCase())
                 ) {
             targetToken.set(
                     targetToken.size() - 1,
