@@ -12,13 +12,13 @@ import java.util.Collections;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-public class AddressTokenizerTest {
+public class TokenizerTest {
 
-    private AddressTokenizer underTest;
+    private Tokenizer underTest;
 
     @Before
     public void setUp() throws Exception {
-        underTest = new AddressTokenizer(Collections.emptyList());
+        underTest = new Tokenizer(Collections.emptyList());
     }
 
     @Test

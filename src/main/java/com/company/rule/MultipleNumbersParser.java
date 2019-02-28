@@ -6,16 +6,16 @@ import com.company.tokenizer.token.Token;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
-public class NumberFirstAddressParser implements AddressParseStrategy {
+public class MultipleNumbersParser implements Parser {
 
     public Address parse(Token[] addressToken) {
         addressToken = sanitize(addressToken);
         if (addressToken.length < 2) {
             return null;
         }
-        Token[] streetCandidates = Arrays.copyOfRange(addressToken, 1, addressToken.length);
-        Token houseNumberCandidate = addressToken[0];
-        if (allFromStringType(streetCandidates)
+        Token[] streetCandidates = Arrays.copyOfRange(addressToken, 0, addressToken.length-1);
+        Token houseNumberCandidate = addressToken[addressToken.length-1];
+        if (hasStringToken(streetCandidates)
                 && isNumberOrMixed(houseNumberCandidate)) {
             return new Address(
                     Arrays.stream(streetCandidates).map(Token::getValue).collect( Collectors.joining(" ") ),
@@ -29,17 +29,16 @@ public class NumberFirstAddressParser implements AddressParseStrategy {
         return Arrays.stream(addressToken).filter(item -> item != null).toArray(Token[]::new);
     }
 
-
-    private boolean allFromStringType(Token[] tokens) {
+    private boolean hasStringToken(Token[] tokens) {
         for (Token item : tokens) {
-            if (!(item.isWord())) {
-                return false;
+            if ((item.isWord())) {
+                return true;
             }
         }
-        return true;
+        return false;
     }
 
     private boolean isNumberOrMixed(Token token) {
-        return (token.isNumber());
+        return token.isNumber();
     }
 }

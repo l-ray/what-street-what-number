@@ -3,7 +3,7 @@ package com.company.rule;
 import com.company.dto.Address;
 import com.company.tokenizer.token.Token;
 
-public interface AddressParseStrategy {
+public interface Parser {
 
     /**
      * Return an address string parsed into street and housenumber.

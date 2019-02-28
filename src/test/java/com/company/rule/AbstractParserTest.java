@@ -8,9 +8,9 @@ import static org.junit.Assert.assertNull;
 /**
  * Test default answers all rules should have in common.
  */
-abstract class AbstractRuleTest {
+abstract class AbstractParserTest {
 
-    protected AddressParseStrategy underTest;
+    protected Parser underTest;
 
     @Test
     public void emptyParameter() throws Exception {

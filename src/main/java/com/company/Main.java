@@ -1,12 +1,11 @@
 package com.company;
 
 import com.company.dto.Address;
-import com.company.rule.MultipleNumbersAddressParser;
-import com.company.rule.NumberFirstAddressParser;
+import com.company.rule.MultipleNumbersParser;
+import com.company.rule.NumberFirstParser;
 import com.company.rule.SimpleAddressParser;
 import com.company.tokenizer.rule.HouseNumberKeywordRule;
 import com.company.tokenizer.rule.HouseNumberStickyRule;
-import com.company.tokenizer.rule.OptimizationRule;
 import com.company.tokenizer.token.Token;
 
 import javax.json.JsonObject;
@@ -14,21 +13,21 @@ import java.util.Arrays;
 
 public class Main {
 
-    private final AddressTokenizer _tokenizer;
-    private final AddressParser _parser;
+    private final Tokenizer _tokenizer;
+    private final Mapper _mapper;
 
     Main() {
-        _tokenizer = new AddressTokenizer(
+        _tokenizer = new Tokenizer(
                 Arrays.asList(
                         new HouseNumberStickyRule(),
                         new HouseNumberKeywordRule(new String[]{"no"})
                 )
         );
-        _parser = new AddressParser(
+        _mapper = new Mapper(
                 Arrays.asList(
                         new SimpleAddressParser(),
-                        new NumberFirstAddressParser(),
-                        new MultipleNumbersAddressParser()
+                        new NumberFirstParser(),
+                        new MultipleNumbersParser()
                 )
         );
     }
@@ -44,11 +43,11 @@ public class Main {
 
     JsonObject convertStringToJSON(String addressAsString) {
         Token[] addressToken = _tokenizer.tokenize(addressAsString);
-        Address result = _parser.parse(addressToken);
+        Address result = _mapper.map(addressToken);
         if (result == null) {
             throw new IllegalArgumentException("Argument is not a mappable address :" + addressAsString );
         }
-        return AddressSerializer.serialize(result);
+        return Serializer.serialize(result);
     }
 
 }

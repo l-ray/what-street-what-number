@@ -6,7 +6,7 @@ import com.company.tokenizer.token.Token;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
-public class SimpleAddressParser implements AddressParseStrategy {
+public class SimpleAddressParser implements Parser {
 
     public Address parse(Token[] addressToken) {
         addressToken = sanitize(addressToken);

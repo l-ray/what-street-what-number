@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
-public class AddressTokenizer {
+public class Tokenizer {
 
     private static final List<String> _STOPWORDS = Arrays.asList(",","");
     private static final Predicate<String> _REMOVE_STOPWORDS = item -> !_STOPWORDS.contains(item);
@@ -20,7 +20,7 @@ public class AddressTokenizer {
 
     private final List<OptimizationRule> _optimizer;
 
-    AddressTokenizer(List<OptimizationRule> optimizer) {
+    Tokenizer(List<OptimizationRule> optimizer) {
         this._optimizer = optimizer;
     }
 

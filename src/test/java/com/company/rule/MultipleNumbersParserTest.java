@@ -8,11 +8,11 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertNotNull;
 
-public class MultipleNumbersAddressParserTest extends AbstractRuleTest {
+public class MultipleNumbersParserTest extends AbstractParserTest {
 
     @Before
     public void setUp() throws Exception {
-        underTest = new MultipleNumbersAddressParser();
+        underTest = new MultipleNumbersParser();
     }
 
     @Test

@@ -9,15 +9,15 @@ import static org.hamcrest.CoreMatchers.containsString;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
 
-public class AddressSerializerTest {
+public class SerializerTest {
     @Test(expected = IllegalArgumentException.class)
     public void serializesNullValue() {
-        AddressSerializer.serialize(null);
+        Serializer.serialize(null);
     }
 
     @Test
     public void serializesEmptyValue() {
-        final JsonObject result = AddressSerializer.serialize(new Address(null, null));
+        final JsonObject result = Serializer.serialize(new Address(null, null));
         assertNotNull(result);
     }
 
@@ -28,7 +28,7 @@ public class AddressSerializerTest {
         final String number = "number";
         final Address input = new Address(street, number);
         // When
-        final JsonObject result = AddressSerializer.serialize(input);
+        final JsonObject result = Serializer.serialize(input);
 
         // Then
         assertNotNull(result);

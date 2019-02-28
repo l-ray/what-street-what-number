@@ -8,7 +8,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertNotNull;
 
-public class SimpleAddressParserTest extends AbstractRuleTest {
+public class SimpleAddressParserTest extends AbstractParserTest {
 
     @Before
     public void setUp() throws Exception {
