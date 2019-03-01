@@ -15,29 +15,31 @@ abstract class AbstractTokenMergingRule implements OptimizationRule {
     @Override
     public Token[] optimize(Token[] srcToken) {
         // TODO the current approach is resource intensive and should be replaced by an array copy-range solution instead
-        List<Token> targetToken = new ArrayList<>();
+        List<Token> targetTokens = new ArrayList<>();
         for (int i = 0; i < srcToken.length; i++) {
             Token aToken = srcToken[i];
-            if ( mergeWithLastToken(srcToken, i, targetToken) == false  ) {
-                targetToken.add(aToken);
+            if (i == 0 || !mergeWithLastToken(aToken, targetTokens)) {
+                targetTokens.add(aToken);
             }
         }
-        return targetToken.toArray(new Token[targetToken.size()]);
+        return targetTokens.toArray(new Token[targetTokens.size()]);
     }
 
-    private boolean mergeWithLastToken(Token[] srcToken, int i, List<Token> targetToken) {
-        Token aToken = srcToken[i];
-        // TODO terrible hack to make the unit test pass - don't forget to refactor
-        if (canLastTwoTokensBeMerged(srcToken, i, targetToken)) {
-            targetToken.set(
-                    targetToken.size() - 1,
-                    TokenFactory.asMultiTypeToken(targetToken.get(targetToken.size() - 1).getValue() + " " + aToken.getValue()
-                    )
+    private boolean mergeWithLastToken(Token currentToken, List<Token> targetTokens) {
+        final int lastIndex = targetTokens.size() - 1;
+        final Token lastToken = targetTokens.isEmpty() ? null : targetTokens.get(lastIndex);
+        if (lastToken != null && canLastTwoTokensBeMerged(lastToken, currentToken)) {
+            final String newTokenValue = lastToken.getValue()
+                    + " "
+                    + currentToken.getValue();
+            targetTokens.set(
+                    lastIndex,
+                    TokenFactory.asMultiTypeToken(newTokenValue)
             );
             return true;
         }
         return false;
     }
 
-    abstract boolean canLastTwoTokensBeMerged(Token[] srcToken, int i, List<Token> targetToken);
+    abstract boolean canLastTwoTokensBeMerged(Token lastToken, Token currentToken);
 }

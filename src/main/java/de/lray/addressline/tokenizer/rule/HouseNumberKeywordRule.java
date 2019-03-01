@@ -4,7 +4,6 @@ import de.lray.addressline.tokenizer.token.Token;
 
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -18,15 +17,22 @@ public class HouseNumberKeywordRule extends AbstractTokenMergingRule {
     private final Set<String> numberPrefixes;
 
     public HouseNumberKeywordRule(String[] keywords) {
+        sanitizeAndLowerCase(keywords);
         numberPrefixes = new HashSet<>(Arrays.asList(keywords));
+        numberPrefixes.remove(null);
+    }
+
+    private String[] sanitizeAndLowerCase(String[] keywords) {
+        for (int i = 0; i < keywords.length; i++) {
+            keywords[i] = keywords[i] != null ? keywords[i].toLowerCase() : null;
+        }
+        return keywords;
     }
 
     @Override
-    boolean canLastTwoTokensBeMerged(Token[] srcToken, int i, List<Token> targetToken) {
-        Token aToken = srcToken[i];
-        return  aToken.isNumber()
-                && i > 0
-                && srcToken[i - 1].isWord()
-                && numberPrefixes.contains(srcToken[i - 1].getValue().toLowerCase());
+    boolean canLastTwoTokensBeMerged(Token lastToken, Token currentToken) {
+        return  currentToken.isNumber()
+                && lastToken.isWord()
+                && numberPrefixes.contains(lastToken.getValue().toLowerCase());
     }
 }

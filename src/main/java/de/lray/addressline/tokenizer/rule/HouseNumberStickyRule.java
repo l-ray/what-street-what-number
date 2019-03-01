@@ -2,8 +2,6 @@ package de.lray.addressline.tokenizer.rule;
 
 import de.lray.addressline.tokenizer.token.Token;
 
-import java.util.List;
-
 /**
  * Makes a very short string stick to a number
  *
@@ -15,11 +13,9 @@ public class HouseNumberStickyRule extends AbstractTokenMergingRule {
     public static final int _MAX_HOUSE_NBR_SUFFIX_LENGTH = 1;
 
     @Override
-    boolean canLastTwoTokensBeMerged(Token[] srcToken, int i, List<Token> targetToken) {
-        Token aToken = srcToken[i];
-        return aToken.isWord()
-                && aToken.getValue().length() <= _MAX_HOUSE_NBR_SUFFIX_LENGTH
-                && i > 0
-                && srcToken[i - 1].isNumber();
+    boolean canLastTwoTokensBeMerged(Token lastToken, Token currentToken) {
+        return currentToken.isWord()
+                && currentToken.getValue().length() <= _MAX_HOUSE_NBR_SUFFIX_LENGTH
+                && lastToken.isNumber();
     }
 }

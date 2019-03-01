@@ -1,8 +1,8 @@
 package de.lray.addressline;
 
+import de.lray.addressline.tokenizer.token.MixedTypeToken;
 import de.lray.addressline.tokenizer.token.NumberToken;
 import de.lray.addressline.tokenizer.token.StringToken;
-import de.lray.addressline.tokenizer.token.MixedTypeToken;
 import de.lray.addressline.tokenizer.token.Token;
 import org.junit.Before;
 import org.junit.Test;
