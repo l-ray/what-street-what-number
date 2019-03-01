@@ -1,10 +1,26 @@
 package de.lray.addressline;
 
-import org.junit.Test;
+import org.junit.*;
+
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 
 import static org.junit.Assert.assertEquals;
 
 public class MainTest {
+
+    private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+
+    @Before
+    public void setUp() {
+        Main.out = new PrintStream(outContent);
+    }
+
+    @After
+    public void tearDown() {
+        Main.out = System.out;
+    }
+
 
     @Test
     public void simpleAddressExamples() throws Exception {
@@ -92,7 +108,10 @@ public class MainTest {
 
     @Test
     public void runsStaticVoidMainHappyPath() {
+        // Given / When
         Main.main(new String[]{"Bach 123"});
+        // Then
+        assertEquals("{\"street\":\"Bach\",\"housenumber\":\"123\"}\n", outContent.toString());
     }
 
     private void assertAddressMapping(String input, String expected) {

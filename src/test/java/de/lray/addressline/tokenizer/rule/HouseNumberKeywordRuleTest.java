@@ -13,7 +13,7 @@ import static org.junit.Assert.assertTrue;
 
 public class HouseNumberKeywordRuleTest {
 
-    private OptimizationRule underTest = new HouseNumberKeywordRule(new String[]{"app"});
+    private OptimizationRule underTest = new HouseNumberKeywordRule(new String[]{"app", null, "no"});
 
     @Test
     public void combineStopWordAndHouseNumbers() throws Exception {
@@ -39,7 +39,7 @@ public class HouseNumberKeywordRuleTest {
                 .addWord("Calle")
                 .addWord("App")
                 .addNumber("1540")
-                .addWord("App")
+                .addWord("No")
                 .addNumber("1541")
                 .build();
         // When
@@ -50,6 +50,6 @@ public class HouseNumberKeywordRuleTest {
         assertTrue(result[1] instanceof MixedTypeToken);
         assertTrue(result[2] instanceof MixedTypeToken);
         assertEquals("1st Original space is preserved", result[1].getValue(), "App 1540");
-        assertEquals("2nd Original space is preserved", result[2].getValue(), "App 1541");
+        assertEquals("2nd Original space is preserved", result[2].getValue(), "No 1541");
     }
 }

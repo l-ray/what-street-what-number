@@ -9,12 +9,15 @@ import de.lray.addressline.tokenizer.rule.HouseNumberStickyRule;
 import de.lray.addressline.tokenizer.token.Token;
 
 import javax.json.JsonObject;
+import java.io.PrintStream;
 import java.util.Arrays;
 
 public class Main {
 
     private final Tokenizer _tokenizer;
     private final Mapper _mapper;
+
+    static PrintStream out = System.out;
 
     Main() {
         _tokenizer = new Tokenizer(
@@ -38,7 +41,7 @@ public class Main {
         }
         String addressAsString = args[0];
         JsonObject result = new Main().convertStringToJSON(addressAsString);
-        System.out.println(result.toString());
+        out.println(result.toString());
     }
 
     JsonObject convertStringToJSON(String addressAsString) {
