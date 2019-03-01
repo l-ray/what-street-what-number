@@ -1,9 +1,11 @@
 package de.lray.addressline.tokenizer.rule;
 
 import de.lray.addressline.tokenizer.token.Token;
-import de.lray.addressline.tokenizer.token.TokenFactory;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * Makes a very short string stick to a number
@@ -11,7 +13,7 @@ import java.util.*;
  * Identify if a number has a short string as next element, and if so assumes it is a house number appendix. An example
  * would be "25" + "b" being connected to "25b".
  */
-public class HouseNumberKeywordRule implements OptimizationRule {
+public class HouseNumberKeywordRule extends AbstractTokenMergingRule {
 
     private final Set<String> numberPrefixes;
 
@@ -20,33 +22,11 @@ public class HouseNumberKeywordRule implements OptimizationRule {
     }
 
     @Override
-    public Token[] optimize(Token[] srcToken) {
-        List<Token> targetToken = new ArrayList<>();
-        for (int i = 0; i < srcToken.length; i++) {
-            Token aToken = srcToken[i];
-            // TODO terrible hack to make the unit test pass - don't forget to refactor
-            if ( possiblyHandlePrefixLetter(srcToken, i, targetToken) == null  ) {
-                targetToken.add(aToken);
-            }
-        }
-        return targetToken.toArray(new Token[targetToken.size()]);
-    }
-
-    private List<Token> possiblyHandlePrefixLetter(Token[] srcToken, int i, List<Token> targetToken) {
+    boolean canLastTwoTokensBeMerged(Token[] srcToken, int i, List<Token> targetToken) {
         Token aToken = srcToken[i];
-        // TODO terrible hack to make the unit test pass - don't forget to refactor
-        if ((aToken.isNumber())
+        return  aToken.isNumber()
                 && i > 0
                 && srcToken[i - 1].isWord()
-                && numberPrefixes.contains(srcToken[i - 1].getValue().toLowerCase())
-                ) {
-            targetToken.set(
-                    targetToken.size() - 1,
-                    TokenFactory.asMultiTypeToken(targetToken.get(targetToken.size() - 1).getValue() + " " + aToken.getValue()
-                    )
-            );
-            return targetToken;
-        }
-        return null;
+                && numberPrefixes.contains(srcToken[i - 1].getValue().toLowerCase());
     }
 }

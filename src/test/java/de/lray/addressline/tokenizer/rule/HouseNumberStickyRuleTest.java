@@ -31,4 +31,25 @@ public class HouseNumberStickyRuleTest {
         assertTrue(result[1] instanceof MixedTypeToken);
         assertEquals("Original space is preserved", result[1].getValue(), "23 b");
     }
+
+    @Test
+    public void combineMultipleAlphanumericHouseNumbersWithSpace() throws Exception {
+        // Given
+        Token[] input = new TokenBuilder()
+                .addNumber("23")
+                .addWord("c")
+                .addWord("Vogelwiese")
+                .addNumber("23")
+                .addWord("b")
+                .build();
+        // When
+        Token[] result = underTest.optimize(input);
+        // Then
+        assertEquals("token-Length of "+Arrays.asList(input), 3, result.length);
+        assertTrue(result[0] instanceof MixedTypeToken);
+        assertTrue(result[1] instanceof StringToken);
+        assertTrue(result[2] instanceof MixedTypeToken);
+        assertEquals("Original space is preserved", result[0].getValue(), "23 c");
+        assertEquals("Original space is preserved", result[2].getValue(), "23 b");
+    }
 }
