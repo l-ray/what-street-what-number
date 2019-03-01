@@ -15,7 +15,7 @@ public class HouseNumberStickyRule extends AbstractTokenMergingRule {
     @Override
     boolean canLastTwoTokensBeMerged(Token lastToken, Token currentToken) {
         return currentToken.isWord()
-                && currentToken.getValue().length() <= _MAX_HOUSE_NBR_SUFFIX_LENGTH
+                && currentToken.length() <= _MAX_HOUSE_NBR_SUFFIX_LENGTH
                 && lastToken.isNumber();
     }
 }

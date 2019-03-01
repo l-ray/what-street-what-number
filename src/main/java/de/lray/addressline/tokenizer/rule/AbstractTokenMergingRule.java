@@ -3,9 +3,7 @@ package de.lray.addressline.tokenizer.rule;
 import de.lray.addressline.tokenizer.token.Token;
 import de.lray.addressline.tokenizer.token.TokenFactory;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 /**
  * Combines functionality that all existing optimization rules have in common. An example

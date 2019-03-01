@@ -6,6 +6,9 @@ import de.lray.addressline.tokenizer.token.Token;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
+/**
+ * Identifies combinations with the house number being the last word in the token list - as e.g. in German addresses.
+ */
 public class SimpleAddressParser extends AbstractParser {
 
     protected Address parseInternal(Token[] addressToken) {

@@ -24,4 +24,9 @@ abstract class AbstractToken implements Token {
     public boolean isNumber() {
         return false;
     }
+
+    @Override
+    final public int length() {
+        return value == null ? -1 : value.length();
+    }
 }

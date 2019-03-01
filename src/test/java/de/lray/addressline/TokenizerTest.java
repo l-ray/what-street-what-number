@@ -63,7 +63,7 @@ public class TokenizerTest {
         // Then
         assertEquals("token-Length of "+input, 3, result.length);
         for (Token item : result) {
-            assertTrue(item.getValue().length() > 0);
+            assertTrue(item.length() > 0);
             assertEquals(
                     "Token correctly trimmed",
                     item.getValue(),

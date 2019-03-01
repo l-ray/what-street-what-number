@@ -1,5 +1,8 @@
 package de.lray.addressline.dto;
 
+/**
+ * Immutable DTO for address data.
+ */
 public class Address {
     private String street;
     private String houseNumber;

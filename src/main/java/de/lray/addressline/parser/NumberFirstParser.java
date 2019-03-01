@@ -6,6 +6,9 @@ import de.lray.addressline.tokenizer.token.Token;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
+/**
+ * Identifies combinations with the house number being the first word in the token list - as e.g. in French addresses.
+ */
 public class NumberFirstParser extends AbstractParser {
 
     public Address parseInternal(Token[] addressToken) {

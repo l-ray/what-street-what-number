@@ -1,9 +1,11 @@
 package de.lray.addressline.tokenizer.token;
 
-/**
- * Created by lray on 25.02.19.
- */
 public abstract class TokenFactory {
+    /**
+     * Returns fitting token based on the input string.
+     * @param input - String without whitespaces
+     * @return token presenting content, adding character information about it.
+     */
     public static Token asToken(String input) {
 
         if (input.matches("[a-zA-ZöäüÖÄÜß-]*")) {

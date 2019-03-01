@@ -37,4 +37,8 @@ public class TokenFactoryTest {
         assertTrue(TokenFactory.asToken("15b") instanceof MixedTypeToken);
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void complainNonsensString() throws Exception {
+        TokenFactory.asToken("@b$ense");
+    }
 }

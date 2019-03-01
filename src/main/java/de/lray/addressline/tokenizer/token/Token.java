@@ -7,4 +7,5 @@ public interface Token {
     String getValue();
     boolean isWord();
     boolean isNumber();
+    int length();
 }

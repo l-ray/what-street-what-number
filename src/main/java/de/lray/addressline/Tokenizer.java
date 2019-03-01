@@ -34,13 +34,13 @@ public class Tokenizer {
                 .filter(_REMOVE_STOPWORDS)
                 .map(_CLEAN_FROM_WHITESPACES)
                 .map(_STRING_TO_TOKEN)
-                .toArray(size -> new Token[size]);
+                .toArray(Token[]::new);
         return optimizeToken(token);
     }
 
     private Token[] optimizeToken(Token[] srcToken) {
-        for (OptimizationRule a_optimizer : _optimizer) {
-            srcToken = a_optimizer.optimize(srcToken);
+        for (OptimizationRule anOptimizer : _optimizer) {
+            srcToken = anOptimizer.optimize(srcToken);
         }
         return srcToken;
     }

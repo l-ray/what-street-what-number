@@ -6,6 +6,9 @@ import de.lray.addressline.tokenizer.token.Token;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
+/**
+ * Handles cases with multiple numbers in the address line, house number being the last word.
+ */
 public class MultipleNumbersParser extends AbstractParser {
 
     public Address parseInternal(Token[] addressToken) {

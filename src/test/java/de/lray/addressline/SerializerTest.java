@@ -29,7 +29,6 @@ public class SerializerTest {
         final Address input = new Address(street, number);
         // When
         final JsonObject result = Serializer.serialize(input);
-
         // Then
         assertNotNull(result);
         assertThat("Holds street",result.toString(), containsString(street));
