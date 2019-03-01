@@ -6,14 +6,10 @@ import de.lray.addressline.tokenizer.token.Token;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
-public class SimpleAddressParser implements Parser {
+public class SimpleAddressParser extends AbstractParser {
 
-    public Address parse(Token[] addressToken) {
-        addressToken = sanitize(addressToken);
-        if (addressToken.length < 2) {
-            return null;
-        }
-        Token[] streetCandidates = Arrays.copyOfRange(addressToken, 0, addressToken.length-1);
+    protected Address parseInternal(Token[] addressToken) {
+        Token[] streetCandidates = Arrays.copyOfRange(addressToken, 0, addressToken.length - 1);
         Token houseNumberCandidate = addressToken[addressToken.length-1];
         if (allFromStringType(streetCandidates)
                 && isNumberOrMixed(houseNumberCandidate)) {
@@ -23,22 +19,5 @@ public class SimpleAddressParser implements Parser {
             );
         }
         return null;
-    }
-
-    private Token[] sanitize(Token[] addressToken) {
-        return Arrays.stream(addressToken).filter(item -> item != null).toArray(Token[]::new);
-    }
-
-    private boolean allFromStringType(Token[] tokens) {
-        for (Token item : tokens) {
-            if (!(item.isWord())) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    private boolean isNumberOrMixed(Token token) {
-        return (token.isNumber());
     }
 }

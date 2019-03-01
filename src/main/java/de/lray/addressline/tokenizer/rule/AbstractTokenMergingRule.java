@@ -4,6 +4,7 @@ import de.lray.addressline.tokenizer.token.Token;
 import de.lray.addressline.tokenizer.token.TokenFactory;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -14,28 +15,24 @@ abstract class AbstractTokenMergingRule implements OptimizationRule {
 
     @Override
     public Token[] optimize(Token[] srcToken) {
-        // TODO the current approach is resource intensive and should be replaced by an array copy-range solution instead
-        List<Token> targetTokens = new ArrayList<>();
-        for (int i = 0; i < srcToken.length; i++) {
-            Token aToken = srcToken[i];
-            if (i == 0 || !mergeWithLastToken(aToken, targetTokens)) {
-                targetTokens.add(aToken);
+        Token[] targetTokens = new Token[srcToken.length];
+        int count = -1;
+        for (Token aToken : srcToken) {
+            if (!mergeWithLastToken(aToken, targetTokens, count)) {
+                targetTokens[++count] = aToken;
             }
         }
-        return targetTokens.toArray(new Token[targetTokens.size()]);
+        return Arrays.copyOf(targetTokens, count + 1);
     }
 
-    private boolean mergeWithLastToken(Token currentToken, List<Token> targetTokens) {
-        final int lastIndex = targetTokens.size() - 1;
-        final Token lastToken = targetTokens.isEmpty() ? null : targetTokens.get(lastIndex);
-        if (lastToken != null && canLastTwoTokensBeMerged(lastToken, currentToken)) {
+    private boolean mergeWithLastToken(Token currentToken, Token[] targetTokens, int lastIndex) {
+        if (lastIndex < 0) { return false; }
+        final Token lastToken = targetTokens[lastIndex];
+        if (canLastTwoTokensBeMerged(lastToken, currentToken)) {
             final String newTokenValue = lastToken.getValue()
                     + " "
                     + currentToken.getValue();
-            targetTokens.set(
-                    lastIndex,
-                    TokenFactory.asMultiTypeToken(newTokenValue)
-            );
+            targetTokens[lastIndex] = TokenFactory.asMultiTypeToken(newTokenValue);
             return true;
         }
         return false;
