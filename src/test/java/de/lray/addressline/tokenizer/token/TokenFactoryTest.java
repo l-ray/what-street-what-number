@@ -35,10 +35,21 @@ public class TokenFactoryTest {
     @Test
     public void recognizesMixedContent() throws Exception {
         assertTrue(TokenFactory.asToken("15b") instanceof MixedTypeToken);
+        assertTrue(TokenFactory.asToken("b15") instanceof MixedTypeToken);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void complainNonsensString() throws Exception {
         TokenFactory.asToken("@b$ense");
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void complainEmptyString() throws Exception {
+        TokenFactory.asToken("");
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void complainNullParameter() throws Exception {
+        TokenFactory.asToken(null);
     }
 }

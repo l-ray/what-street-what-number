@@ -1,6 +1,13 @@
 package de.lray.addressline.tokenizer.token;
 
+import java.util.regex.Pattern;
+
 public abstract class TokenFactory {
+
+    private static final Pattern _WORDS_PATTERN = Pattern.compile("[a-zA-ZöäüÖÄÜß-]+");
+    private static final Pattern _NUMBER_PATTERN = Pattern.compile("[0-9]+");
+    private static final Pattern _MIXED_TYPE_PATTERN = Pattern.compile("[0-9a-zA-Z]+");
+
     /**
      * Returns fitting token based on the input string.
      * @param input - String without whitespaces
@@ -8,15 +15,15 @@ public abstract class TokenFactory {
      */
     public static Token asToken(String input) {
 
-        if (input.matches("[a-zA-ZöäüÖÄÜß-]*")) {
+        if (_WORDS_PATTERN.matcher(input).matches()) {
             return new StringToken(input);
         }
 
-        if (input.matches("[0-9]*")) {
+        if (_NUMBER_PATTERN.matcher(input).matches()) {
             return new NumberToken(input);
         }
 
-        if (input.matches("[0-9a-zA-Z]*")) {
+        if (_MIXED_TYPE_PATTERN.matcher(input).matches()) {
             return new MixedTypeToken((input));
         }
         throw new IllegalArgumentException("Could not tokenize input"+input);
