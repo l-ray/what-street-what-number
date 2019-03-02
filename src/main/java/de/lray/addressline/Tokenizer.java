@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
-public class Tokenizer {
+final class Tokenizer {
 
     private static final List<String> _STOPWORDS = Arrays.asList(",","");
     private static final Predicate<String> _REMOVE_STOPWORDS = item -> !_STOPWORDS.contains(item);

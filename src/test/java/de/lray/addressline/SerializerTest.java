@@ -1,6 +1,6 @@
 package de.lray.addressline;
 
-import de.lray.addressline.dto.Address;
+import de.lray.addressline.dto.AddressLine;
 import org.junit.Test;
 
 import javax.json.JsonObject;
@@ -17,7 +17,7 @@ public class SerializerTest {
 
     @Test
     public void serializesEmptyValue() {
-        final JsonObject result = Serializer.serialize(new Address(null, null));
+        final JsonObject result = Serializer.serialize(new AddressLine(null, null));
         assertNotNull(result);
     }
 
@@ -26,7 +26,7 @@ public class SerializerTest {
         // Given
         final String street = "street";
         final String number = "number";
-        final Address input = new Address(street, number);
+        final AddressLine input = new AddressLine(street, number);
         // When
         final JsonObject result = Serializer.serialize(input);
         // Then

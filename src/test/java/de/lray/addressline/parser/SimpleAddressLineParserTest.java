@@ -1,6 +1,6 @@
 package de.lray.addressline.parser;
 
-import de.lray.addressline.dto.Address;
+import de.lray.addressline.dto.AddressLine;
 import de.lray.addressline.tokenizer.token.Token;
 import de.lray.addressline.tokenizer.token.TokenBuilder;
 import org.junit.Before;
@@ -8,11 +8,11 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertNotNull;
 
-public class SimpleAddressParserTest extends AbstractParserTest {
+public class SimpleAddressLineParserTest extends AbstractParserTest {
 
     @Before
     public void setUp() throws Exception {
-        underTest = new SimpleAddressParser();
+        underTest = new SimpleAddressLineParser();
     }
 
     @Test
@@ -23,7 +23,7 @@ public class SimpleAddressParserTest extends AbstractParserTest {
                 .addNumber("3")
                 .build();
         // When
-        Address result = underTest.parse(input);
+        AddressLine result = underTest.parse(input);
         // Then
         assertNotNull(result);
     }
@@ -36,7 +36,7 @@ public class SimpleAddressParserTest extends AbstractParserTest {
                 .addMixed("123B")
                 .build();
         // When
-        Address result = underTest.parse(input);
+        AddressLine result = underTest.parse(input);
         // Then
         assertNotNull(result);
     }
@@ -50,7 +50,7 @@ public class SimpleAddressParserTest extends AbstractParserTest {
                 .addNumber("3")
                 .build();
         // When
-        Address result = underTest.parse(input);
+        AddressLine result = underTest.parse(input);
         // Then
         assertNotNull(result);
     }

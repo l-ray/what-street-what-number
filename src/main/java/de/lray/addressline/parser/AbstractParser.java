@@ -1,6 +1,6 @@
 package de.lray.addressline.parser;
 
-import de.lray.addressline.dto.Address;
+import de.lray.addressline.dto.AddressLine;
 import de.lray.addressline.tokenizer.token.Token;
 
 import java.util.Arrays;
@@ -8,7 +8,7 @@ import java.util.Arrays;
 public abstract class AbstractParser implements Parser {
 
     @Override
-    public Address parse(Token[] addressToken) {
+    public AddressLine parse(Token[] addressToken) {
         addressToken = sanitize(addressToken);
         if (addressToken.length < 2) {
             return null;
@@ -16,7 +16,7 @@ public abstract class AbstractParser implements Parser {
         return parseInternal(addressToken);
     }
 
-    abstract Address parseInternal(Token[] addressToken);
+    abstract AddressLine parseInternal(Token[] addressToken);
 
     protected Token[] sanitize(Token[] source) {
         Token[] target = new Token[source.length];

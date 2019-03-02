@@ -1,9 +1,9 @@
 package de.lray.addressline;
 
-import de.lray.addressline.dto.Address;
+import de.lray.addressline.dto.AddressLine;
 import de.lray.addressline.parser.MultipleNumbersParser;
 import de.lray.addressline.parser.NumberFirstParser;
-import de.lray.addressline.parser.SimpleAddressParser;
+import de.lray.addressline.parser.SimpleAddressLineParser;
 import de.lray.addressline.tokenizer.rule.HouseNumberKeywordRule;
 import de.lray.addressline.tokenizer.rule.HouseNumberStickyRule;
 import de.lray.addressline.tokenizer.token.Token;
@@ -28,7 +28,7 @@ public class Main {
         );
         _mapper = new Mapper(
                 Arrays.asList(
-                        new SimpleAddressParser(),
+                        new SimpleAddressLineParser(),
                         new NumberFirstParser(),
                         new MultipleNumbersParser()
                 )
@@ -46,7 +46,7 @@ public class Main {
 
     JsonObject convertStringToJSON(String addressAsString) {
         Token[] addressToken = _tokenizer.tokenize(addressAsString);
-        Address result = _mapper.map(addressToken);
+        AddressLine result = _mapper.map(addressToken);
         if (result == null) {
             throw new IllegalArgumentException("Argument is not a mappable address :" + addressAsString );
         }

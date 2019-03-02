@@ -5,7 +5,7 @@ import org.junit.Test;
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.junit.Assert.*;
 
-public class AddressTest {
+public class AddressLineTest {
 
     static final String STREET = "Street";
     static final String HOUSE_NUMBER = "5";
@@ -13,7 +13,7 @@ public class AddressTest {
     @Test
     public void constructorDeliveringGetter() throws Exception {
         // Given / When
-        Address result = new Address(STREET, HOUSE_NUMBER);
+        AddressLine result = new AddressLine(STREET, HOUSE_NUMBER);
         // Then
         assertEquals(result.getStreet(),STREET);
         assertEquals(result.getHouseNumber(), HOUSE_NUMBER);
@@ -22,9 +22,9 @@ public class AddressTest {
     @Test
     public void toStringWorks() throws Exception {
         // Given
-        Address anAddress = new Address(STREET, HOUSE_NUMBER);
+        AddressLine anAddressLine = new AddressLine(STREET, HOUSE_NUMBER);
         // When
-        String result = anAddress.toString();
+        String result = anAddressLine.toString();
         // Then
         assertThat("Holds Street",result, containsString(STREET));
         assertThat("Holds house number",result, containsString(HOUSE_NUMBER));
@@ -33,7 +33,7 @@ public class AddressTest {
     @Test
     public void isNullSafe() throws Exception {
         // Given / When
-        Address result = new Address(null, null);
+        AddressLine result = new AddressLine(null, null);
         // Then
         assertNull("Street", result.getStreet());
         assertNull("House number",result.getHouseNumber());

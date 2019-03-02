@@ -1,22 +1,22 @@
 package de.lray.addressline;
 
-import de.lray.addressline.dto.Address;
+import de.lray.addressline.dto.AddressLine;
 
 import javax.json.Json;
 import javax.json.JsonObject;
 import javax.json.JsonObjectBuilder;
 
-public abstract class Serializer {
-    public static JsonObject serialize(Address anAddress) {
-        if (anAddress == null) {
+abstract class Serializer {
+    static JsonObject serialize(AddressLine anAddressLine) {
+        if (anAddressLine == null) {
             throw new IllegalArgumentException("Null value not allowed.");
         }
         JsonObjectBuilder json = Json.createObjectBuilder();
-        if (anAddress.getStreet() != null) {
-            json.add("street", anAddress.getStreet());
+        if (anAddressLine.getStreet() != null) {
+            json.add("street", anAddressLine.getStreet());
         }
-        if (anAddress.getHouseNumber() != null) {
-            json.add("housenumber", anAddress.getHouseNumber());
+        if (anAddressLine.getHouseNumber() != null) {
+            json.add("housenumber", anAddressLine.getHouseNumber());
         }
         return json.build();
     }

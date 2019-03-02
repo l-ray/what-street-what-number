@@ -3,11 +3,11 @@ package de.lray.addressline.dto;
 /**
  * Immutable DTO for address data.
  */
-public class Address {
+public class AddressLine {
     private String street;
     private String houseNumber;
 
-    public Address(String street, String houseNumber) {
+    public AddressLine(String street, String houseNumber) {
         this.street = street;
         this.houseNumber = houseNumber;
     }
