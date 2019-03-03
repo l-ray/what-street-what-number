@@ -15,6 +15,6 @@ public final class NumberToken extends AbstractToken {
 
     @Override
     public String toString() {
-        return "NumberToken |"+getValue()+"|";
+        return "NumberToken |" + getValue() + "|";
     }
 }

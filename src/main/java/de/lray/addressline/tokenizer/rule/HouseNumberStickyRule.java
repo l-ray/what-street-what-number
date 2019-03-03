@@ -8,7 +8,7 @@ import de.lray.addressline.tokenizer.token.Token;
  * Identify if a number has a short string as next element, and if so assumes it is a house number appendix. An example
  * would be "25" + "b" being connected to "25b".
  */
-public class HouseNumberStickyRule extends AbstractTokenMergingRule {
+public final class HouseNumberStickyRule extends AbstractTokenMergingRule {
 
     public static final int _MAX_HOUSE_NBR_SUFFIX_LENGTH = 1;
 

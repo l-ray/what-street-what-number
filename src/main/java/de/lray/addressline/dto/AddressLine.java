@@ -3,7 +3,7 @@ package de.lray.addressline.dto;
 /**
  * Immutable DTO for address data.
  */
-public class AddressLine {
+public final class AddressLine {
     private String street;
     private String houseNumber;
 
@@ -11,7 +11,6 @@ public class AddressLine {
         this.street = street;
         this.houseNumber = houseNumber;
     }
-
 
     public String getStreet() {
         return street;

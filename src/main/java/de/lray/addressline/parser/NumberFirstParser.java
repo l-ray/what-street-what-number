@@ -11,7 +11,8 @@ import java.util.stream.Collectors;
  */
 public final class NumberFirstParser extends AbstractParser {
 
-    public AddressLine parseInternal(Token[] addressToken) {
+    @Override
+    protected AddressLine parseInternal(Token[] addressToken) {
         Token[] streetCandidates = Arrays.copyOfRange(addressToken, 1, addressToken.length);
         Token houseNumberCandidate = addressToken[0];
         if (allFromStringType(streetCandidates)

@@ -17,7 +17,7 @@ public final class MixedTypeToken extends AbstractToken {
 
     @Override
     public String toString() {
-        return "MixedTypeToken |"+getValue()+"|";
+        return "MixedTypeToken |" + getValue() + "|";
     }
 
 }
