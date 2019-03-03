@@ -21,7 +21,23 @@ public class MainTest {
         Main.out = System.out;
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void runsStaticVoidMainWithoutParameter() {
+        Main.main(new String[]{});
+    }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void runsStaticVoidMainWithBogusAddressParameter() {
+        Main.main(new String[]{"fkjdsl@fdjslk1 13@"});
+    }
+
+    @Test
+    public void runsStaticVoidMainHappyPath() {
+        // Given / When
+        Main.main(new String[]{"Bach 123"});
+        // Then
+        assertEquals("{\"street\":\"Bach\",\"housenumber\":\"123\"}\n", outContent.toString());
+    }
     @Test
     public void simpleAddressExamples() throws Exception {
 
@@ -96,30 +112,12 @@ public class MainTest {
         convert(null);
     }
 
-    @Test(expected = IllegalArgumentException.class)
-    public void runsStaticVoidMainWithoutParameter() {
-        Main.main(new String[]{});
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void runsStaticVoidMainWithBogusAddressParameter() {
-        Main.main(new String[]{"fkjdsl@fdjslk1 13@"});
-    }
-
-    @Test
-    public void runsStaticVoidMainHappyPath() {
-        // Given / When
-        Main.main(new String[]{"Bach 123"});
-        // Then
-        assertEquals("{\"street\":\"Bach\",\"housenumber\":\"123\"}\n", outContent.toString());
-    }
-
     private void assertAddressMapping(String input, String expected) {
         String actual = convert(input);
         assertEquals(actual, expected);
     }
 
     private String convert(String input) {
-        return new Main().convertStringToJSON(input).toString();
+        return Main.convert(input);
     }
 }

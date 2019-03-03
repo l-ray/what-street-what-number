@@ -9,6 +9,17 @@ import java.util.List;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
+/**
+ * Splits a given input string into token/units.
+ *
+ * Part of the tokenization are
+ * - a removal of stop words (not adding any value to the information) as e..g empty strings,
+ * comma
+ * - cleaning from unnecessary white-spaces
+ * - an optimization of tokens based on optimization rules given as parameters during the class instantiation.
+ *
+ * Seen from an ETL process, this step represents an "extraction" phase.
+ */
 final class Tokenizer {
 
     private static final List<String> _STOPWORDS = Arrays.asList(",","");
@@ -18,9 +29,9 @@ final class Tokenizer {
     private static final Function<String, String> _CLEAN_FROM_WHITESPACES = item -> item.replaceFirst(_WHITESPACES_AS_REGEX, "");
     private static final Function<String, Token> _STRING_TO_TOKEN = item -> TokenFactory.asToken(item);
 
-    private final List<OptimizationRule> _optimizer;
+    private final OptimizationRule[] _optimizer;
 
-    Tokenizer(List<OptimizationRule> optimizer) {
+    Tokenizer(OptimizationRule[] optimizer) {
         this._optimizer = optimizer;
     }
 

@@ -1,13 +1,12 @@
 package de.lray.addressline;
 
+import de.lray.addressline.tokenizer.rule.OptimizationRule;
 import de.lray.addressline.tokenizer.token.MixedTypeToken;
 import de.lray.addressline.tokenizer.token.NumberToken;
 import de.lray.addressline.tokenizer.token.StringToken;
 import de.lray.addressline.tokenizer.token.Token;
 import org.junit.Before;
 import org.junit.Test;
-
-import java.util.Collections;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -18,7 +17,7 @@ public class TokenizerTest {
 
     @Before
     public void setUp() throws Exception {
-        underTest = new Tokenizer(Collections.emptyList());
+        underTest = new Tokenizer(new OptimizationRule[0]);
     }
 
     @Test
