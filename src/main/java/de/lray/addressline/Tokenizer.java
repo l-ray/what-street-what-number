@@ -12,13 +12,12 @@ import java.util.function.Predicate;
 /**
  * Splits a given input string into token/units.
  *
- * Part of the tokenization are
- * - a removal of stop words (not adding any value to the information) as e..g empty strings,
- * comma
+ * Steps of tokenizing an input String are
+ * - removing stop words (words not adding any value to the information)
  * - cleaning from unnecessary white-spaces
- * - an optimization of tokens based on optimization rules given as parameters during the class instantiation.
+ * - optimizing token based on rules given as parameters during class instantiation.
  *
- * Seen from an ETL process, this step represents an "extraction" phase.
+ * Seen from an ETL process, this step represents the "extraction" phase.
  */
 final class Tokenizer {
 

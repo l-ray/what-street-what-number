@@ -10,7 +10,7 @@ import javax.json.JsonObject;
  *
  * The process is divided into the phases extraction, transformation and load.
  */
-public class AddressLineConverter {
+final class AddressLineConverter {
 
     private final Tokenizer _tokenizer;
     private final Mapper _mapper;
