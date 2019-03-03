@@ -2,9 +2,13 @@ package de.lray.addressline;
 
 import java.io.PrintStream;
 
-public class Main {
+public final class Main {
 
     static PrintStream out = System.out;
+
+    private Main() {
+        // for command line execution only.
+    }
 
     public static void main(String[] args) {
         validate(args);
