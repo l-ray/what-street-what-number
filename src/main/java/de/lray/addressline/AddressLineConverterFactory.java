@@ -8,7 +8,18 @@ import de.lray.addressline.tokenizer.rule.HouseNumberKeywordRule;
 import de.lray.addressline.tokenizer.rule.HouseNumberStickyRule;
 import de.lray.addressline.tokenizer.rule.OptimizationRule;
 
+/**
+ * Factory class constructing converter, holding all dependencies.
+ *
+ * For different regions, different configurations can lead to enhanced performance - as the
+ * order of parser can be aligned with the distribution of address formats.
+ */
 public class AddressLineConverterFactory {
+
+    private AddressLineConverterFactory(){
+        // static class, nothing to be initiated.
+    }
+
     public static AddressLineConverter createDefault() {
         return new AddressLineConverter(
             new Tokenizer(
